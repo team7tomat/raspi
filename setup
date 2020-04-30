@@ -1,0 +1,16 @@
+#!/bin/bash
+cd ~
+git clone --single-branch --branch raspi https://github.com/MorrisEston/team7-Tomatoes.git
+git clone 'repo'
+git checkout 'pi branch'
+
+cd ~/repo/pigpiod-master && make && make install # install pigpiod
+
+cd ~/repo
+cp -f .bashrc ~/.bashrc # replace bashrc
+
+sudo apt-get install python3
+sudo apt-get install python3-pip
+pip3 install -r requirements.txt
+
+sudo reboot

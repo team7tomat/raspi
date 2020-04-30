@@ -1,0 +1,1 @@
+{"lux": 8000, "blue": 3, "white": 2, "hred": 1, "nightbegin": "21:00", "nightend": "04:00", "pinw": "12", "pinb": "13", "pinhr": "16", "pinlr": "19", "intensity": 20}
