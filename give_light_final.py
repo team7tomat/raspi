@@ -2,14 +2,13 @@ import datetime
 from time import sleep
 from get_sunlight import read_light
 from multipwm_led import Armature
-#from get_daytime import get_daytime
 import pigpio
 import json
 import os
 
 max_colors = { "blue":4211, "white":16725, "hred":41335 }
 
-def do_shit(ratios, pins, lux_goal, intensity):
+def change_lights(ratios, pins, lux_goal, intensity):
 	armature = Armature(int(pins["pinw"]), int(pins["pinb"]), int(pins["pinhr"]), int(pins["pinlr"]))
 	functions = { "blue": armature.set_blue, "white": armature.set_white, "hred": armature.set_hred }
 
@@ -24,27 +23,29 @@ def do_shit(ratios, pins, lux_goal, intensity):
 #			return
 
 	current_lux = read_light()
+	# if current_lux > lux_goal we don't need to turn the lights on
 	artificial_light = lux_goal - current_lux if current_lux < lux_goal else 0
 
 	if artificial_light != 0:
 		x = 0
+		# calculate x based on the color ratios specified in the config
 		for key in max_colors:
 			x += max_colors[key]*ratios[key]
 		x = artificial_light / x
 
-		for key, value in ratios.items():
+		for key, value in ratios.items(): # turn each color on with the calculated amount
 			func = functions.get(key)
 			func(x*value*100)
 			#print(x*value*100)
 
 	now = datetime.datetime.now()
 	with open("24h_info.txt", "a+", os.O_NONBLOCK) as file:
-		file.write(str(int(current_lux)) + ', ')
+		# zfill pads numbers with zeroes if the number is < 10
 		month = str(now.month).zfill(2)
 		day = str(now.day).zfill(2)
 		hour = str(now.hour).zfill(2)
 		minute = str(now.minute).zfill(2)
-		file.write("{}-{}-{} {}:{}:00".format(now.year, month, day, hour, minute) + '\n')
+		file.write("{}, {}-{}-{} {}:{}:00".format(str(int(current_lux)), now.year, month, day, hour, minute) + '\n')
 
 	sleep(10)
 	armature.end()
@@ -60,7 +61,7 @@ def time_logic(now, daybegin, dayend, nightbegin, nightend, ratios, pins, lux_go
 		#print("now < dayend", "\tnow: ", now, "\tdayend: ", dayend)
 		#sleep(0.5)
 		#now += datetime.timedelta(minutes=20)
-		do_shit(ratios, pins, lux_goal, intensity)
+		change_lights(ratios, pins, lux_goal, intensity)
 
 
 def main():

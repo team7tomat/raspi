@@ -18,8 +18,5 @@ def read_light(addr=DEVICE):
 	data = bus.read_i2c_block_data(addr,ONE_TIME_HIGH_RES_MODE)
 	return convert_to_number(data)
 
-def main():
-	print(read_light())
-
 if __name__ == "__main__":
-	main()
+	print(read_light())

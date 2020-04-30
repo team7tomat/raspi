@@ -22,23 +22,21 @@ class Armature:
 		self.pi.set_PWM_frequency(self.blue, 200)
 
 
-	# Translate % value to 8bit
-	def perc_trans(self, arg):
-		if int(arg) > 100:
-			return 255
-		if int(arg) < 0:
-			return 0
-		return int(float(arg) * 2.55)
+	# Convert percentage to 8bit
+	def convert_percentage(self, arg):
+		if int(arg) > 100:	return 255
+		elif int(arg) < 0:	return 0
+		else:			return int(float(arg) * 2.55)
 
-	# Set % color intensity
+	# Set percentage color intensity
 	def set_white(self, arg):
-		self.pi.set_PWM_dutycycle(self.white, self.perc_trans(arg))
+		self.pi.set_PWM_dutycycle(self.white, self.convert_percentage(arg))
 	def set_hred(self, arg):
-		self.pi.set_PWM_dutycycle(self.hred, self.perc_trans(arg))
+		self.pi.set_PWM_dutycycle(self.hred, self.convert_percentage(arg))
 	def set_lred(self, arg):
-		self.pi.set_PWM_dutycycle(self.lred, self.perc_trans(arg))
+		self.pi.set_PWM_dutycycle(self.lred, self.convert_percentage(arg))
 	def set_blue(self, arg):
-		self.pi.set_PWM_dutycycle(self.blue, self.perc_trans(arg))
+		self.pi.set_PWM_dutycycle(self.blue, self.convert_percentage(arg))
 
 	def turn_off_lights(self):
 		self.set_white(0)
