@@ -2,7 +2,7 @@
 cd ~
 git clone https://github.com/team7tomat/raspi.git
 
-cd ~/raspi/pigpiod-master && make && make install # install pigpiod
+cd ~/raspi/pigpio-master && make && make install # install pigpiod
 
 cd ~/raspi
 cp -f .bashrc ~/.bashrc # replace bashrc
@@ -11,4 +11,4 @@ sudo apt-get install python3
 sudo apt-get install python3-pip
 pip3 install -r requirements.txt
 
-sudo reboot
+#sudo reboot
