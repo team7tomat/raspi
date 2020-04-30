@@ -2,6 +2,6 @@
 
 sudo sed -i 's/start_x=0/start_x=1/' /boot/config.txt &&
 sudo killall pigpiod &&
-sudo pigpiod &&
-python3 /home/pi/Documents/network/pi-server.py &
-python3 /home/pi/Documents/sensor/give_light_final.py & 
+sudo pigpiod
+python3 /home/pi/raspi/pi-server.py &
+python3 /home/pi/raspi/give_light_final.py & 

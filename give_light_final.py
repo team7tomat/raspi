@@ -2,7 +2,7 @@ import datetime
 from time import sleep
 from get_sunlight import read_light
 from multipwm_led import Armature
-from get_daytime import get_daytime
+#from get_daytime import get_daytime
 import pigpio
 import json
 import os
@@ -89,13 +89,17 @@ def main():
 			if nightend.hour < nightbegin.hour:
 				nightend += datetime.timedelta(days=1)
 
-		with open ("tomato.txt", 'r') as file:
-			tomatoes = json.loads(file.read())
-			print(tomatoes)
-			if int(tomatoes["non_ripe"]) == 0 and int(tomatoes["ripe"]) != 0:
-				sleep(600)
-			else:
-				time_logic(now, daybegin, dayend, nightbegin, nightend, ratios, pins, lux_goal, intensity)
+		try:
+			with open ("tomato.txt", 'r') as file:
+				tomatoes = json.loads(file.read())
+				print(tomatoes)
+				exit()
+				if int(tomatoes["non_ripe"]) == 0 and int(tomatoes["ripe"]) != 0:
+					sleep(600)
+				else:
+					time_logic(now, daybegin, dayend, nightbegin, nightend, ratios, pins, lux_goal, intensity)
+		except FileNotFoundError:
+			time_logic(now, daybegin, dayend, nightbegin, nightend, ratios, pins, lux_goal, intensity)
 
 
 
