@@ -3,19 +3,21 @@ echo -e "Cloning repository:"
 cd ~
 git clone https://github.com/team7tomat/raspi.git
 
-echo -e "\nInstalling pigpio"
+echo -e "\nInstalling pigpio:"
 cd ~/raspi/pigpio-master && sudo make && sudo make install # install pigpiod
 
-echo -e "\nReplacing .bashrc"
+echo -e "\nReplacing .bashrc:"
 cd ~/raspi
 cp -f .bashrc ~/.bashrc # replace bashrc
 
 
-echo -e "\nInstalling Python3"
+echo -e "\nInstalling Python3:"
 sudo apt-get install python3
 sudo apt-get install python3-pip
 
-echo -e "\nInstalling Python requirements"
+echo -e "\nInstalling Python requirements:"
 pip3 install -r requirements.txt
 
+echo -e "\nRebooting in 3 seconds..."
+sleep 3
 sudo reboot
