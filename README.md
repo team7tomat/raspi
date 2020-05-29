@@ -4,13 +4,13 @@
 Alla Raspberry PI:s har GPIO-pinnar för olika slags inputs och outputs. Vi använder model 3B+, som har inbyggt wifi.
 Bilden under detaljerar GPIO-pinnarna: nummer (1-40) samt namn.
 
-<img src="https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png">
+<img src="https://i.imgur.com/eZlqshD.png">
 
 ## Kamera
 Installation:
-På Raspberry:n finns det två stycken kopplingar som kameramodulen kan kopplas in i. -- Bild på raspberry:ns olika portar, röd markering runt kameraporten närmast ethernet-porten --
-Kamera modulens connector har en kopparfärgad enda som skall riktas MOT/FRÅN ??? ethernet-porten.
-Lyft upp det svarta locket på porten. Sätt ned connectorn tills den inte går ned längre, och stäng sedan locket.
+På Raspberry:n finns det en lång port mellan ljud- och hdmi-porten, som kameran ska kopplas in i. 
+Kameramodulens connector har en kopparfärgad ända som skall riktas från ethernet-porten.
+Lyft försiktigt upp det svarta locket på porten, sätt ned connectorn tills den inte går ned längre, och stäng sedan locket.
 
 ## Ljussensor
 Installation:
@@ -40,6 +40,6 @@ Sladdarna mellan armaturen och Raspberry PI:n kopplas in så här, uppifrån och
 | 5V | Tom (kopplas ej i) | Ingen pin |
 
 ## Programvara
-De filer och scripts om Raspberry PI:n behöver laddas just nu ned automatiskt från detta Github-repository.
-Ifall fler Raspberry PI:s ska användas måste filen med namnet **Setup** laddas ner och köras.
-Filen är ett bash-script som laddar ned projektet, installerar nödvändiga filer samt ändrar så att Startup-filen startas automatiskt vid påslagning.
+De filer och scripts om Raspberry PI:n behöver laddas ned automatiskt från detta Github-repository.
+Ifall fler Raspberry PI:s ska användas måste filen med namnet **setup** laddas ner och köras.
+Filen är ett bash-script som laddar ned projektet, installerar nödvändiga filer samt ändrar så att **Startup**-filen startas automatiskt vid påslagning.
